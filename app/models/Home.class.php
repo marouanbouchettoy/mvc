@@ -6,14 +6,20 @@ class Home
     {
         $this->db = new Database;
     }
-    public function getProducts()
+    public function getUsers()
     {
-        $this->db->query("SELECT * FROM product");
+        $this->db->query("SELECT * FROM user");
         $this->db->execute();
-        $products = $this->db->fetchAll();
-        if($products)
-            return $products;
+        $users = $this->db->fetchAll();
+        if($users)
+            return $users;
         else
             return false;
+    }
+    public function insert($name)
+    {
+        $this->db->query("INSERT INTO `user`(`name`) VALUES (:name)");
+        $this->db->bind(":name", $name);
+        $this->db->execute();
     }
 }
